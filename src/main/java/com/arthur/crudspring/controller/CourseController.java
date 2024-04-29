@@ -38,14 +38,23 @@ public class CourseController {
   }
 
   @PutMapping(path = "/{id}")
-  @ResponseStatus(code = HttpStatus.OK)
-  public Course edit(@RequestBody Course course) {
-    return courseRepository.save(course);
+  public ResponseEntity<Course> edit(@PathVariable long id, @RequestBody Course course) {
+    return courseRepository.findById(id).map(found -> {
+      found.setName(course.getName());
+      found.setCategory(course.getCategory());
+      Course updated = courseRepository.save(found);
+      return ResponseEntity.ok(updated);
+    })
+        .orElse(ResponseEntity.notFound().build());
   }
 
   @DeleteMapping(path = "/{id}")
-  public void deleteById(@PathVariable long id) {
-    courseRepository.deleteById(id);
+  public ResponseEntity<Void> deleteById(@PathVariable long id) {
+    return courseRepository.findById(id).map((found) -> {
+      courseRepository.deleteById(id);
+      return ResponseEntity.noContent().<Void>build();
+    })
+        .orElse(ResponseEntity.notFound().build());
   }
 
   @GetMapping(path = "/{id}")
