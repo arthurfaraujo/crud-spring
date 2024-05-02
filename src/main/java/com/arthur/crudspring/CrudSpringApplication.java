@@ -24,7 +24,7 @@ public class CrudSpringApplication {
 
       Course c = new Course();
       c.setName("Spring Boot BootCamp");
-      c.setCategory("back-end");
+      c.setCategory("Back-end");
 
       courseRepository.save(c);
     };
