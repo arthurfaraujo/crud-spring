@@ -4,7 +4,6 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 import org.hibernate.validator.constraints.Length;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
@@ -25,7 +24,7 @@ public class Course {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @JsonProperty("_id")
-  private Long id;
+  private long id;
 
   @NotBlank
   @Length(min = 3, max = 150)
@@ -37,7 +36,6 @@ public class Course {
   @Column(length = 20, nullable = false)
   private String category;
 
-  @JsonIgnore
   @Length(max = 8)
   @Pattern(regexp = "active|inactive")
   @Column(length = 8, nullable = false)
