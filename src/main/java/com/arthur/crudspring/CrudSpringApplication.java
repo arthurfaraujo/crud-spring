@@ -24,24 +24,27 @@ public class CrudSpringApplication {
     return args -> {
       courseRepository.deleteAll();
 
-      Course c = new Course();
-      c.setName("Spring Boot BootCamp");
-      c.setCategory(Category.BACK_END);
+      for (int i = 1; i < 11; i++) {
+        Course c = new Course();
+        c.setName("Course " + i);
+        c.setCategory(Category.FRONT_END);
+  
+        Lesson l1 = new Lesson();
+        l1.setName("Lesson 1");
+        l1.setYoutubeUrl("6g8G9LhHx3s");
+        l1.setCourse(c);
+  
+        Lesson l2 = new Lesson();
+        l2.setName("Lesson 2");
+        l2.setYoutubeUrl("6g8G9LhHx3s");
+        l2.setCourse(c);
+  
+        c.getLessons().add(l1);
+        c.getLessons().add(l2);
+        courseRepository.save(c);
+      }
 
-      Lesson l1 = new Lesson();
-      l1.setName("Spring Boot Introduction");
-      l1.setYoutubeUrl("6g8G9LhHx3s");
-      l1.setCourse(c);
 
-      Lesson l2 = new Lesson();
-      l2.setName("Spring Boot Configuration");
-      l2.setYoutubeUrl("6g8G9LhHx3s");
-      l2.setCourse(c);
-
-      c.getLessons().add(l1);
-      c.getLessons().add(l2);
-
-      courseRepository.save(c);
     };
   }
 
