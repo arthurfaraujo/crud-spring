@@ -38,7 +38,7 @@ public class CourseController {
   }
 
   @GetMapping(path = "/{id}")
-  public CourseDTO getById(@PathVariable @NotNull @Positive long id) {
+  public CourseDTO getById(@PathVariable @NotNull @Positive Long id) {
     return courseService.getById(id);
   }
 
@@ -49,13 +49,13 @@ public class CourseController {
   }
 
   @PutMapping(path = "/{id}")
-  public CourseDTO edit(@PathVariable @NotNull @Positive long id, @RequestBody @Valid @NotNull CourseDTO course) {
+  public CourseDTO edit(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid @NotNull CourseDTO course) {
     return courseService.edit(id, course);
   }
 
   @DeleteMapping(path = "/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void delete(@PathVariable @NotNull @Positive long id) {
+  public void delete(@PathVariable @NotNull @Positive Long id) {
     courseService.delete(id);
   }
 }

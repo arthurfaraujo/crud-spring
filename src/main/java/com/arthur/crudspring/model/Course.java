@@ -26,7 +26,7 @@ public class Course {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   @JsonProperty("_id")
-  private long id;
+  private Long id;
 
   @NotBlank
   @Length(min = 3, max = 150)

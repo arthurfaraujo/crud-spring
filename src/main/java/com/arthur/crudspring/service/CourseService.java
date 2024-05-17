@@ -30,7 +30,7 @@ public class CourseService {
     return courseRepository.findAll().stream().map(courseMapper::toDTO).toList();
   }
 
-  public CourseDTO getById(@NotNull @Positive long id) {
+  public CourseDTO getById(@NotNull @Positive Long id) {
     return courseRepository.findById(id).map(courseMapper::toDTO).orElseThrow(() -> new RecordNotFoundException(id));
   }
 
@@ -38,7 +38,7 @@ public class CourseService {
     return courseMapper.toDTO(courseRepository.save(courseMapper.toEntity(course)));
   }
 
-  public CourseDTO edit(@NotNull @Positive long id, @Valid @NotNull CourseDTO course) {
+  public CourseDTO edit(@NotNull @Positive Long id, @Valid @NotNull CourseDTO course) {
     return courseRepository.findById(id).map(found -> {
       found.setName(course.name());
       found.setCategory(courseMapper.convertCategoryValue(course.category()));
@@ -46,7 +46,7 @@ public class CourseService {
     }).map(courseMapper::toDTO).orElseThrow(() -> new RecordNotFoundException(id));
   }
 
-  public void delete(@NotNull @Positive long id) {
+  public void delete(@NotNull @Positive Long id) {
     courseRepository.delete(courseRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(id)));
   }
 }

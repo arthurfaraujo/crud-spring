@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
 public record CourseDTO(
-    long _id,
+    Long _id,
     @NotBlank @Length(min = 3, max = 150) String name,
     @Length(max = 10) @Pattern(regexp = "Back-end|Front-end") String category) {
       
