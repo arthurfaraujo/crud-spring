@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.arthur.crudspring.enums.Category;
 import com.arthur.crudspring.model.Course;
 import com.arthur.crudspring.repository.CourseRepository;
 
@@ -24,7 +25,7 @@ public class CrudSpringApplication {
 
       Course c = new Course();
       c.setName("Spring Boot BootCamp");
-      c.setCategory("Back-end");
+      c.setCategory(Category.BACK_END);
 
       courseRepository.save(c);
     };

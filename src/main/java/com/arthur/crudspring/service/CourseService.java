@@ -41,7 +41,7 @@ public class CourseService {
   public CourseDTO edit(@NotNull @Positive long id, @Valid @NotNull CourseDTO course) {
     return courseRepository.findById(id).map(found -> {
       found.setName(course.name());
-      found.setCategory(course.category());
+      found.setCategory(courseMapper.convertCategoryValue(course.category()));
       return courseRepository.save(found);
     }).map(courseMapper::toDTO).orElseThrow(() -> new RecordNotFoundException(id));
   }

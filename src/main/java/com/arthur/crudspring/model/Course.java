@@ -4,6 +4,8 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 import org.hibernate.validator.constraints.Length;
 
+import com.arthur.crudspring.enums.Category;
+import com.arthur.crudspring.enums.Status;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
@@ -12,13 +14,13 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
 @Entity
 @SQLDelete(sql = "UPDATE Course SET status = 'inactive' WHERE id = ?")
-@SQLRestriction("status = 'active'")
+@SQLRestriction("status <> 'inactive'")
 public class Course {
 
   @Id
@@ -31,13 +33,13 @@ public class Course {
   @Column(length = 150, nullable = false, unique = true)
   private String name;
 
-  @Length(max = 10)
-  @Pattern(regexp = "Back-end|Front-end")
-  @Column(length = 20, nullable = false)
-  private String category;
+  @NotNull
+  @Column(length = 10, nullable = false)
+  // @Convert(converter = CategoryConverter.class)
+  private Category category;
 
-  @Length(max = 8)
-  @Pattern(regexp = "active|inactive")
+  @NotNull
   @Column(length = 8, nullable = false)
-  private String status = "active";
+  // @Convert(converter = StatusConverter.class)
+  private Status status = Status.ACTIVE;
 }
